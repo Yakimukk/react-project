@@ -8,3 +8,14 @@ export const getListNews = () => {
     dispatch(setListNews(res.data))
   }
 }
+
+export const getNews = async (id, setNews) => {
+  const res = await axios.get(`https://dummyjson.com/posts/${id}`)
+  setNews(res.data)
+}
+
+export const getComments = async (id, setComments) => {
+  const res = await axios.get(`https://dummyjson.com/posts/${id}/comments`)
+  setComments(res.data.comments)
+}
+
