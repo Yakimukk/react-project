@@ -10,7 +10,7 @@ export const NewsPost = (props) => {
         <p className="card-text">{news.body}</p>
       </div>
       <div className="card-footer text-muted fw-lighter">
-        <span><b>reactions:</b>  {news.reactions}</span> | <span><b>user:</b> {news.userId}</span> | <span><b>tags:</b>{news.tags}</span>
+        <span><b>reactions:</b>  {news.reactions}</span> | <span><b>user:</b> {news.userId}</span> | <span><b>tags:</b> {news.tags}</span>
       </div>
     </div>
   )

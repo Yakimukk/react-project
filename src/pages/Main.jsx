@@ -25,7 +25,7 @@ export const Main = () => {
     <Fragment>
       <div className="container"><button className="mb-3 btn btn-secondary" onClick={onClickUpdate}>Update</button></div>
       {listNews.map(news => 
-        <News news={news}/>
+        <News key={news.id} news={news}/>
       )}
     </Fragment>
   )

@@ -9,11 +9,10 @@ export const NewsPage = (props) => {
   const [news, setNews] = useState({})
   const [comments, setComments] = useState([]);
 
-
   useEffect(() => {
     getNews(id, setNews)
     getComments(id, setComments)
-  }, []);
+  }, [id]);
   
   return (
     <Fragment>
@@ -25,12 +24,11 @@ export const NewsPage = (props) => {
           {comments && (
             <ul className="list-group mt-3">
               {comments.map(comment => 
-                <Comment comment={comment} />
+                <Comment key={comment.id}comment={comment} />
               )}
           </ul>
           )}
         </div>
-
       )}
     </Fragment>
   )
