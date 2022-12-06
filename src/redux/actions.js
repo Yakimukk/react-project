@@ -2,9 +2,9 @@ import axios from 'axios'
 import { setListPost } from './reducer'
 
 
-export const getListPost = () => {
+export const getListPost = (limit, skip) => {
   return async (dispatch) => {
-    const res = await axios.get('https://dummyjson.com/posts')
+    const res = await axios.get(`https://dummyjson.com/posts?limit=${limit}&skip=${skip}`)
     dispatch(setListPost(res.data))
   }
 }

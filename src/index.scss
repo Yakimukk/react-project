@@ -23,3 +23,24 @@ code {
 .list-group-item {
   padding: 20px;
 }
+
+.pages {
+
+  margin: 20px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .page, .current-page {
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    border: 1px solid gray;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .current-page {
+    background-color: gray;
+  }
+}
