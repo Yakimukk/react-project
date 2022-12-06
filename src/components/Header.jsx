@@ -5,7 +5,7 @@ export const Header = () => (
   <header>
     <nav className="navbar navbar-dark navbar-expand-lg">
       <div className="navbar-brand">
-        Hacker News
+        POST SITE
       </div>
       <ul className="navbar-nav">
         <li className="nav-item">
@@ -13,7 +13,7 @@ export const Header = () => (
             className="nav-link"
             to="/"
           >
-            Главная
+            Home
           </NavLink>
         </li>
       </ul>

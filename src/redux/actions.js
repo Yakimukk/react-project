@@ -1,17 +1,17 @@
 import axios from 'axios'
-import { setListNews } from './reducer'
+import { setListPost } from './reducer'
 
 
-export const getListNews = () => {
+export const getListPost = () => {
   return async (dispatch) => {
     const res = await axios.get('https://dummyjson.com/posts')
-    dispatch(setListNews(res.data))
+    dispatch(setListPost(res.data))
   }
 }
 
-export const getNews = async (id, setNews) => {
+export const getPost = async (id, setPost) => {
   const res = await axios.get(`https://dummyjson.com/posts/${id}`)
-  setNews(res.data)
+  setPost(res.data)
 }
 
 export const getComments = async (id, setComments) => {

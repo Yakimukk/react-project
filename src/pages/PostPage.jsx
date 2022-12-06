@@ -2,24 +2,24 @@ import React, { Fragment, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { NewsPost } from "../components/NewsPost";
 import { Comment } from "../components/Comment";
-import { getNews, getComments } from "../redux/actions";
+import { getPost, getComments } from "../redux/actions";
 
-export const NewsPage = (props) => {
+export const PostPage = (props) => {
   const {id} = useParams();
-  const [news, setNews] = useState({})
+  const [post, setPost] = useState({})
   const [comments, setComments] = useState([]);
 
   useEffect(() => {
-    getNews(id, setNews)
+    getPost(id, setPost)
     getComments(id, setComments)
   }, [id]);
   
   return (
     <Fragment>
-      {news && (
+      {post && (
         <div className="container">
-          <h3 className="fw-lighter mt-3">News:</h3>
-          <NewsPost news= {news} />
+          <h3 className="fw-lighter mt-3">Post:</h3>
+          <NewsPost post= {post} />
           <h4 className="fw-lighter mt-3">Comments:</h4>
           {comments && (
             <ul className="list-group mt-3">

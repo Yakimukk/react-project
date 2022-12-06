@@ -1,17 +1,17 @@
-const SET_LIST_NEWS = 'SET_LIST_NEWS'
+const SET_POST_LIST = 'SET_POST_LIST'
 
 const initialState = {
-  newsList: [],
+  postList: [],
   
 };
 
-export const newsReducer = (state = initialState, action) => {
+export const postReducer = (state = initialState, action) => {
   switch(action.type) {
-    case SET_LIST_NEWS:
-      return {...state, newsList: action.payload.posts}
+    case SET_POST_LIST:
+      return {...state, postList: action.payload.posts}
     default:
       return state
   }
 }
 
-export const setListNews = (listNews) => ({type: SET_LIST_NEWS, payload: listNews})
+export const setListPost = (listPost) => ({type: SET_POST_LIST, payload: listPost})

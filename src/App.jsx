@@ -2,7 +2,7 @@ import React from 'react';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import {Header} from './components/Header';
 import { Main } from './pages/Main';
-import { NewsPage } from './pages/NewsPage';
+import { PostPage } from './pages/PostPage';
 
 function App() {
   return (
@@ -10,7 +10,7 @@ function App() {
       <Header />
       <Routes>
         <Route path='/' exact element={<Main/>} />
-        <Route path='posts/:id' element={<NewsPage/>} />
+        <Route path='posts/:id' element={<PostPage/>} />
       </Routes>
     </Router>
   );
