@@ -6,58 +6,59 @@ import { setSkipPosts } from '../redux/reducer';
 import { createPages } from '../func/pagesCreator';
 
 export const Main = () => {
-  const dispatch = useDispatch();
-  const { postList, limit, total, skip } = useSelector(
-    (state) => state.listPost
-  );
-  const [active, setActive] = useState('false');
-  const pagesCount = Math.ceil(total / limit);
-  const pages = [];
+	const dispatch = useDispatch();
+	const { postList, limit, total, skip } = useSelector(
+		(state) => state.listPost
+	);
+	const [active, setActive] = useState(false);
+	const pagesCount = Math.ceil(total / limit);
+	const pages = [];
 
-  createPages(pages, pagesCount);
+	createPages(pages, pagesCount);
+	console.log(pages[0]);
 
-  useEffect(() => {
-    dispatch(getListPost(limit, skip));
-  }, [skip]);
+	useEffect(() => {
+		dispatch(getListPost(limit, skip));
+	}, [skip]);
 
-  useEffect(() => {
-    setActive(1);
-  }, []);
+	useEffect(() => {
+		setActive(1);
+	}, []);
 
-  // useEffect(() => {
-  //   const interval = setInterval(() => dispatch(getListPost()), 60000);
-  //   return () => clearInterval(interval);
-  // }, [])
+	// useEffect(() => {
+	//   const interval = setInterval(() => dispatch(getListPost()), 60000);
+	//   return () => clearInterval(interval);
+	// }, [])
 
-  const onClickUpdate = () => {
-    dispatch(getListPost());
-  };
+	const onClickUpdate = () => {
+		dispatch(getListPost(limit, skip));
+	};
 
-  return (
-    <Fragment>
-      <div className="container">
-        <button className="mb-3 btn btn-secondary" onClick={onClickUpdate}>
-          Update
-        </button>
-      </div>
-      {postList.map((post) => (
-        <Post key={post.id} post={post} />
-      ))}
-      <div className="pages">
-        {pages.map((page, index, skip) => (
-          <span
-            className={`page ${active === page ? 'current-page' : ''}`}
-            key={index}
-            onClick={() => {
-              skip = (page - 1) * 10;
-              dispatch(setSkipPosts(skip));
-              setActive(page);
-            }}
-          >
-            {page}
-          </span>
-        ))}
-      </div>
-    </Fragment>
-  );
+	return (
+		<Fragment>
+			<div className="container">
+				<button className="mb-3 btn btn-secondary" onClick={onClickUpdate}>
+					Update
+				</button>
+			</div>
+			{postList.map((post) => (
+				<Post key={post.id} post={post} />
+			))}
+			<div className="pages">
+				{pages.map((page, index, skip) => (
+					<span
+						className={`page ${active === page ? 'current-page' : ''}`}
+						key={index}
+						onClick={() => {
+							skip = (page - 1) * 10;
+							dispatch(setSkipPosts(skip));
+							setActive(page);
+						}}
+					>
+						{page}
+					</span>
+				))}
+			</div>
+		</Fragment>
+	);
 };

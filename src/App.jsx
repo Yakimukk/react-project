@@ -5,15 +5,15 @@ import { Main } from './pages/Main';
 import { PostPage } from './pages/PostPage';
 
 function App() {
-  return (
-    <Router>
-      <Header />
-      <Routes>
-        <Route path="/" exact element={<Main />} />
-        <Route path="posts/:id" element={<PostPage />} />
-      </Routes>
-    </Router>
-  );
+	return (
+		<Router>
+			<Header />
+			<Routes>
+				<Route path="/" exact element={<Main />} />
+				<Route path="posts/:id" element={<PostPage />} />
+			</Routes>
+		</Router>
+	);
 }
 
 export default App;
