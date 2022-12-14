@@ -2,36 +2,43 @@ import React, { Fragment, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Post } from '../components/Post';
 import { getListPost } from '../redux/actions';
-import { setSkipPosts } from '../redux/reducer';
-import { createPages } from '../func/pagesCreator';
 
 export const Main = () => {
 	const dispatch = useDispatch();
-	const { postList, limit, total, skip } = useSelector(
-		(state) => state.listPost
-	);
-	const [active, setActive] = useState(false);
-	const pagesCount = Math.ceil(total / limit);
-	const pages = [];
+	const { postList, limit, total } = useSelector((state) => state.listPost);
+	const [active, setActive] = useState(1);
+	const [skip, setSkip] = useState(0);
+	const [pages, setPage] = useState([]);
 
-	createPages(pages, pagesCount);
-	console.log(pages[0]);
+	const pagesCount = Math.ceil(total / limit);
+
+	useEffect(() => {
+		for (let i = 1; i <= pagesCount; i++) {
+			setPage((pages) => [...pages, i]);
+		}
+	}, [pagesCount]);
 
 	useEffect(() => {
 		dispatch(getListPost(limit, skip));
 	}, [skip]);
 
 	useEffect(() => {
-		setActive(1);
-	}, []);
-
-	// useEffect(() => {
-	//   const interval = setInterval(() => dispatch(getListPost()), 60000);
-	//   return () => clearInterval(interval);
-	// }, [])
+		const interval = setInterval(
+			() => dispatch(getListPost(limit, skip)),
+			60000
+		);
+		return () => clearInterval(interval);
+	}, [skip]);
 
 	const onClickUpdate = () => {
 		dispatch(getListPost(limit, skip));
+	};
+
+	const onClickPag = (elem) => {
+		const sk = (elem - 1) * limit;
+		setSkip(sk);
+		dispatch(getListPost(limit, sk));
+		setActive(elem);
 	};
 
 	return (
@@ -45,15 +52,11 @@ export const Main = () => {
 				<Post key={post.id} post={post} />
 			))}
 			<div className="pages">
-				{pages.map((page, index, skip) => (
+				{pages.map((page, index) => (
 					<span
 						className={`page ${active === page ? 'current-page' : ''}`}
 						key={index}
-						onClick={() => {
-							skip = (page - 1) * 10;
-							dispatch(setSkipPosts(skip));
-							setActive(page);
-						}}
+						onClick={() => onClickPag(page)}
 					>
 						{page}
 					</span>
