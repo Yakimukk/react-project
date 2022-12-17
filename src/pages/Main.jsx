@@ -1,11 +1,15 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Loader } from '../components/Loader';
 import { Post } from '../components/Post';
 import { getListPost } from '../redux/actions';
 
 export const Main = () => {
 	const dispatch = useDispatch();
-	const { postList, limit, total } = useSelector((state) => state.listPost);
+	const { postList, limit, total, loading } = useSelector(
+		(state) => state.listPost
+	);
+
 	const [active, setActive] = useState(1);
 	const [skip, setSkip] = useState(0);
 	const [pages, setPage] = useState([]);
@@ -43,25 +47,29 @@ export const Main = () => {
 
 	return (
 		<Fragment>
-			<div className="container">
-				<button className="mb-3 btn btn-secondary" onClick={onClickUpdate}>
-					Update
-				</button>
-			</div>
-			{postList.map((post) => (
-				<Post key={post.id} post={post} />
-			))}
-			<div className="pages">
-				{pages.map((page, index) => (
-					<span
-						className={`page ${active === page ? 'current-page' : ''}`}
-						key={index}
-						onClick={() => onClickPag(page)}
-					>
-						{page}
-					</span>
-				))}
-			</div>
+			{loading ? (
+				<Loader />
+			) : (
+				<div className="container">
+					<button className="mb-3 btn btn-secondary" onClick={onClickUpdate}>
+						Update
+					</button>
+					{postList.map((post) => (
+						<Post key={post.id} post={post} />
+					))}
+					<div className="pages">
+						{pages.map((page, index) => (
+							<span
+								className={`page ${active === page ? 'current-page' : ''}`}
+								key={index}
+								onClick={() => onClickPag(page)}
+							>
+								{page}
+							</span>
+						))}
+					</div>
+				</div>
+			)}
 		</Fragment>
 	);
 };
