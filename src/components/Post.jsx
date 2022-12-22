@@ -22,12 +22,12 @@ export const Post = (props) => {
 					<p className="text-muted fw-lighter">
 						<span>
 							<b>reactions:</b> {post.reactions}
-						</span>{' '}
-						|{' '}
+						</span>
+						|
 						<span onClick={() => setModal(true)}>
 							<b>user:</b> {post.userId}
-						</span>{' '}
-						|{' '}
+						</span>
+						|
 						<span>
 							<b>tags:</b> {post.tags}
 						</span>
