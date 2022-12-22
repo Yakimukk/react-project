@@ -23,3 +23,8 @@ export const getComments = async (id, setComments) => {
 	const res = await axios.get(`https://dummyjson.com/posts/${id}/comments`);
 	setComments(res.data.comments);
 };
+
+export const getUser = async (userId, setUser) => {
+	const res = await axios.get(`https://dummyjson.com/users/${userId}`);
+	setUser(res.data);
+};

@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { User } from './User';
 
 export const Post = (props) => {
 	const post = props.post;
+	const [isModal, setModal] = useState(false);
 
 	return (
 		<ul className="list-group container">
@@ -22,7 +24,7 @@ export const Post = (props) => {
 							<b>reactions:</b> {post.reactions}
 						</span>{' '}
 						|{' '}
-						<span>
+						<span onClick={() => setModal(true)}>
 							<b>user:</b> {post.userId}
 						</span>{' '}
 						|{' '}
@@ -32,6 +34,7 @@ export const Post = (props) => {
 					</p>
 				</div>
 			</li>
+			<User isVisible={isModal} onClose={() => setModal(false)} />
 		</ul>
 	);
 };
